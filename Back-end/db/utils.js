@@ -11,7 +11,8 @@ module.exports = {
         useNewUrlParser: true
       };
 
-      mongoose.connect(`mongodb://localhost/SongsList`, optios);
+      //mongoose.connect(`mongodb://localhost/SongsList`, optios);
+      mongoose.connect(`mongodb+srv://user:user@db-songs-playlist-0srf7.mongodb.net/SongsList?retryWrites=true`, optios);
 
       return mongoose.connection;
     },
