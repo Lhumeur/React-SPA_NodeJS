@@ -22,12 +22,6 @@ module.exports = {
         if (err) return console.log(err);
       });
     },
-  getSongsData:
-    function () {
-      return model.Song.find({}, function (err) {
-        if (err) return console.log(err);
-      });
-    },
   getGenresData:
     function () {
       return model.Genre.find({}, function (err) {
@@ -39,5 +33,19 @@ module.exports = {
       return model.Year.find({}, function (err) {
         if (err) return console.log(err);
       });
+    },
+  getSongsCount:
+    function () {
+      return model.Song.countDocuments({}, function (err) {
+        if (err) return console.log(err);
+      });
+    },
+  getSongsData:
+    function (index, limit) {
+      var offset = --index * limit;
+
+      return model.Song.find({}, function (err) {
+        if (err) return console.log(err);
+      }).skip(offset).limit(limit);
     }
 };

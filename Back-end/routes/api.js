@@ -3,22 +3,34 @@ var api = express.Router();
 
 var db = require('../db/utils');
 
-api.get('/singers', function(req, res) {
-  db.getSingersData().then(data => res.send(data));
+api.get('/songs', function (req, res) {
+
+  var index = isNaN(+req.query.index)&&(+req.query.index > 0) ? 1 : +req.query.index;
+  var limit = isNaN(+req.query.limit)&&(+req.query.index > 0) ? 10 : +req.query.limit;
+
+  var response = {
+    SINGERS: [],
+    GENRES: [],
+    YEARS: [],
+    SONGS: []
+  };
+
+  Promise.all([
+    db.getSingersData(),
+    db.getGenresData(),
+    db.getYearsData(),
+    db.getSongsData(index, limit),
+    db.getSongsCount()
+  ]).then(data => {
+
+    response.SINGERS = data[0];
+    response.GENRES = data[1];
+    response.YEARS = data[2];
+    response.SONGS = data[3];
+    response.PAGES = Math.ceil(data[4] / limit);
+
+    res.send(response)
+  })
 });
-
-api.get('/songs', function(req, res) {
-  db.getSongsData().then(data => res.send(data));
-});
-
-api.get('/genres', function(req, res) {
-  db.getGenresData().then(data => res.send(data));
-});
-
-api.get('/years', function(req, res) {
-  db.getYearsData().then(data => res.send(data));
-});
-
-
 
 module.exports = api;
