@@ -4,8 +4,8 @@ var api = express.Router();
 var db = require('../db/utils');
 
 api.get('/songs', function (req, res) {
-  var index = isNaN(+req.query.index) && (+req.query.index > 0) ? 1 : +req.query.index;
-  var limit = isNaN(+req.query.limit) && (+req.query.index > 0) ? 10 : +req.query.limit;
+  var index = !!!req.query.index ? 1 : +req.query.index;
+  var limit = !!!req.query.limit ? 10 : +req.query.limit;
 
   var filters = {SORTING: {"singer": 1}};
 
