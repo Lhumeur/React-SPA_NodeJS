@@ -2,6 +2,31 @@ var mongoose = require('mongoose');
 
 var model = require('./schema');
 
+function getFiltersString(filters) {
+  if (Object.keys(filters).length <= 1) {
+    return {};
+  }
+
+  var filterString = {};
+
+  for (key in filters) {
+    if (key === "SINGERS" && filters.SINGERS.length > 0) {
+      filterString.singer = {};
+      filterString.singer.$in = filters.SINGERS;
+    }
+    if (key === "GENRES" && filters.GENRES.length > 0) {
+      filterString.genre = {};
+      filterString.genre.$in = filters.GENRES;
+    }
+    if (key === "YEARS" && filters.YEARS.length > 0) {
+      filterString.year = {};
+      filterString.year.$in = filters.YEARS;
+    }
+  }
+
+  return filterString;
+}
+
 module.exports = {
   setUpConnection:
     function setUpConnection() {
@@ -16,36 +41,46 @@ module.exports = {
 
       return mongoose.connection;
     },
-  getSingersData:
+  getSingers:
     function () {
-      return model.Singer.find({}, function (err) {
+      return model.distinct("singer", function (err) {
+        mongoose.disconnect();
+
         if (err) return console.log(err);
       });
     },
-  getGenresData:
+  getGenres:
     function () {
-      return model.Genre.find({}, function (err) {
+      return model.distinct("genre", function (err) {
+        mongoose.disconnect();
+
         if (err) return console.log(err);
       });
     },
-  getYearsData:
+  getYears:
     function getYearsData() {
-      return model.Year.find({}, function (err) {
+      return model.distinct("year", function (err) {
+        mongoose.disconnect();
+
         if (err) return console.log(err);
       });
     },
   getSongsCount:
-    function () {
-      return model.Song.countDocuments({}, function (err) {
+    function (filters) {
+      return model.find(getFiltersString(filters), function (err) {
+        mongoose.disconnect();
+
         if (err) return console.log(err);
-      });
+      }).countDocuments();
     },
-  getSongsData:
-    function (index, limit) {
+  getSongsList:
+    function (index, limit, filters) {
       var offset = --index * limit;
 
-      return model.Song.find({}, function (err) {
+      return model.find(getFiltersString(filters), function (err) {
+        mongoose.disconnect();
+
         if (err) return console.log(err);
-      }).skip(offset).limit(limit);
+      }).skip(offset).limit(limit).sort(filters.SORTING);
     }
 };
