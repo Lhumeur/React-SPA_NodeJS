@@ -1,63 +1,124 @@
-![Express from scratch](https://guides.nanobox.io/assets/quickstart-icons/express.png)
+# Description
 
-# Express from scratch
+Back-end server application is designed to get a list of songs through API requests and was implemented on nanobox-express for NodeJS with mongodb for storage Data.
 
-Run an Express app locally, install nothing besides nanobox. 
+## App was deployed on cloud service and server home-page is available by the next link:
 
-<a href="https://nanobox.io/download"><img src="https://guides.nanobox.io/assets/quickstart-icons/download.png" /></a>
+<a href="http://back-end.nanoapp.io">Back-end server application.</a>
 
+# Run server locally and deployment
 
 ## Clone the repo
 
 ```bash
 # clone the code
-git clone https://github.com/nanobox-quickstarts/nanobox-express.git
+git clone https://github.com/Lhumeur/React-SPA_NodeJS.git
 
 # cd into the express app
-cd nanobox-express
+cd Back-end
 ```
 
-## Run the app
+## Run the app localy
 
 ```bash
-# Add a convenient way to access your app from the browser
-nanobox dns add local express.dev
-
-# Run express as you would normally, with Nanobox
-nanobox run npm start
+# Run
+npm start
 ```
 
-## Check it out
+## Deploy an app to AWS
 
-Visit your app at <a href="http://express.dev:3000" target="\_blank">express.dev:3000</a>
+Go to the next link and perform steps from sections "Prerequsites" and  "Deploy Express to AWS":
 
-## Explore
+<a href="https://content.nanobox.io/express-js-app-deployment-with-nanobox/">Deploy an app to AWS.</a>
 
-With Nanobox, you don't have to have anything installed on your machine to run your app:
+# API usage
+
+The application implements 2 API methods: GET and POST
+
+## GET method Request
+
+Request available by the URL "{app home-page}/api/songs" and can be used for primary initialization front-end application.
+
+Request can takes two parameters: 
+- "index" - number of requested data page (1 by default);
+- "limit" - number of the requested data on the page (10 by default).
 
 ```bash
-# drop into a Nanobox console
-nanobox run
-
-# where node is installed,
-node -v
-
-# your packages are available,
-npm list
-
-# and your code is mounted
-ls
+# Example:
+http://back-end.nanoapp.io/api/songs/
+# or
+http://back-end.nanoapp.io/api/songs/?index=3&limit=5
 ```
 
-## Clean things up _(optional)_
+## GET method Response
 
-If you want to keep this project ignore this. If not, clean things up by removing the DNS entry:
+Response of the GET method  - it is an Object with parameters:
+- "SINGERS" - sorted Array of singer names;
+- "GENRES" - an Array of song genres;
+- "YEARS" - an Array of years of song publications;
+- "SONGS" - an Array of Objects with their own parameters "singer", "genre", "title" and "year";
+- "PAGES" - total pages count according GET method Request parameters.
+
+## POST method Request
+
+Request available by the URL "{app home-page}/api/songs" and can be used to retrieve filtered and sorted data pages.
+
+Request can takes two parameters (see GET Request Example above): 
+- "index" - number of requested data page (1 by default);
+- "limit" - number of the requested data on the page (10 by default),
+
+and Request can take Body in JSON format:
 
 ```bash
-nanobox dns rm local express.dev
+# JavaScript XHR Example of the POST Request:
+var data = JSON.stringify({
+  "SINGERS": [
+    "Singer 1",
+    "Singer 4"
+  ],
+  "GENRES": [],
+  "YEARS": [
+    1990,
+    1994
+  ],
+  "SORTING": {
+    "singer": 1
+  }
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "http://back-end.nanoapp.io/api/songs/?index=1&limit=10");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("cache-control", "no-cache");
+xhr.setRequestHeader("Postman-Token", "80753f1a-b72b-4389-abb4-914601334c5a");
+
+xhr.send(data);
 ```
 
-## Now What?
-For more details about running express apps with nanobox visit [guides.nanobox.io/nodejs/express/](https://guides.nanobox.io/nodejs/express/)
+were:
+- "SINGERS" - an Array of Singers, which will be filtered data;
+- "GENRES" - an Array of Genres, which will be filtered data;
+- "YEARS" - an Array of Years of song publications, which will be filtered data;
+- "SORTING" - is an Object for Response data sorting (by default "SORTING": {"singer": 1}), where:
 
-<a href="https://nanobox.io"><img src="https://guides.nanobox.io/assets/quickstart-icons/footer.png" /></a>
+-- parameter name = "SONGS" parameter name from GET Request (see above);
+
+-- parameter value = 1 (ascending sorting) or 0 (descending sorting);
+
+## POST method Response
+
+Response of the POST method  - it is an Object with parameters:
+- "SONGS" - an Array of Objects with their own parameters "singer", "genre", "title" and "year";
+- "PAGES" - total pages count according POST method Request parameters.
+
+# DB
+
+Mongodb Data Base for app was deployed on a separate cloud service.
