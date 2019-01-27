@@ -1,23 +1,44 @@
 import {backendApiUrl} from "../config/config"
 
-export const fetchRequest = () => {
+export const fetchGetRequest = () => {
   return {
-    type: "@@songs/SEND_REQUEST"
+    type: "@@songs/GET_SEND_REQUEST"
   };
 };
 
-export const fetchReqSuccess = dataList => {
+export const fetchGetReqSuccess = dataList => {
   return {
-    type: "@@songs/RESPONCE_SERVER",
+    type: "@@songs/GET_RESPONCE_SERVER",
     dataList
   };
 };
 
-export const fetchReqError = error => {
+export const fetchGetReqError = error => {
   console.log(error);
 
   return {
-    type: "@@songs/ERROR_SERVER"
+    type: "@@songs/GET_ERROR_SERVER"
+  };
+};
+
+export const fetchPostRequest = () => {
+  return {
+    type: "@@songs/POST_SEND_REQUEST"
+  };
+};
+
+export const fetchPostReqSuccess = dataList => {
+  return {
+    type: "@@songs/POST_RESPONCE_SERVER",
+    dataList
+  };
+};
+
+export const fetchPostReqError = error => {
+  console.log(error);
+
+  return {
+    type: "@@songs/POST_ERROR_SERVER"
   };
 };
 
@@ -30,9 +51,9 @@ export const setSorting = sorting => {
 
 export const fetchGetData = () => {
   const url = backendApiUrl;
-
+  console.log(url);
   return dispatch => {
-    dispatch(fetchRequest());
+    dispatch(fetchGetRequest());
 
     fetch(url)
       .then(response => {
@@ -43,49 +64,44 @@ export const fetchGetData = () => {
         }
       })
       .then(dataList => {
-        dispatch(fetchReqSuccess(dataList))
+        dispatch(fetchGetReqSuccess(dataList))
       })
-      .catch(error => dispatch(fetchReqError(error)));
+      .catch(error => dispatch(fetchGetReqError(error)));
   };
 };
 
-export const fetchPostData = () => {
+export const fetchPostData = (sorting) => {
   const index = 2;
   const limit = 20;
   const data = {
     SINGERS: [],
     GENRES: [],
     YEARS: [],
-    SORTING: {
-      singer: -1
-    }
+    SORTING: sorting
   };
 
   const url = backendApiUrl + '?index=' + index + '&limit=' + limit;
 
   return dispatch => {
-    dispatch(fetchRequest());
+    dispatch(fetchPostRequest());
 
     fetch(url, {
       method: 'POST',
-      headers: [
-        ["Content-Type", "application/json"],
-        ["Content-Type", "text/plain"]
-      ],
-      body: JSON.stringify(data)
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data),
+      json: true
     }).then(response => {
-      if (response.ok) {
-        console.log(response.json());
 
+      if (response.ok) {
         return response.json();
       } else {
         throw new Error(response.status);
       }
     })
       .then(dataList => {
-        dispatch(fetchReqSuccess(dataList))
+        dispatch(fetchPostReqSuccess(dataList))
       })
-      .catch(error => dispatch(fetchReqError(error)));
+      .catch(error => dispatch(fetchPostReqError(error)));
   };
 };
 

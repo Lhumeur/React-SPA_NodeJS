@@ -11,7 +11,6 @@ const withMain = Component => {
 
   const mapStateToProps = state => {
     return {
-      dataList: state.songs.dataList,
       isError: state.songs.isError,
       loading: state.songs.loading
     };

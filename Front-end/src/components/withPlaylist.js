@@ -10,9 +10,7 @@ const withPlaylist = Component => {
 
   const mapStateToProps = state => {
     return {
-      songs: state.songs.dataList.SONGS,
-      pages: state.songs.dataList.PAGES,
-      sorting: state.songs.SORTING
+      ...state.songs
     }
   };
 

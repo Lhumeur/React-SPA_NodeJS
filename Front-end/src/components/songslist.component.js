@@ -1,16 +1,20 @@
 import React, {Fragment} from "react";
+import PreloaderComponent from "./preloader.component";
+import ErrorComponent from "./error.component";
 
 const SongsListComponent = (props) => {
-  function setSort(column) {
-    if (props.sorting.hasOwnProperty(column)) {
-      return props.sorting[column];
+
+  const setSort = (column) => {
+    if (props.SORTING.hasOwnProperty(column)) {
+      return props.SORTING[column];
     } else {
       return 0;
     }
-  }
-
+  };
   return (
     <Fragment>
+
+
       <table>
         <tbody>
         <tr onClick={props.sortAction}>
@@ -19,15 +23,16 @@ const SongsListComponent = (props) => {
           <th className="genre" data-sort={setSort("genre")}>Жанр</th>
           <th className="year" data-sort={setSort("year")}>Год</th>
         </tr>
-        {props.songs === undefined ? <tr/> : props.songs.map((item, i) => <tr key={i}>
-          <td>{item.singer}</td>
-          <td>{item.title}</td>
-          <td>{item.genre}</td>
-          <td>{item.year}</td>
-        </tr>)}
+        {(props.loading[1]) ? <tr><td className="preloader__row" colSpan="4"><PreloaderComponent/></td></tr> :
+          props.isError[1] ? <tr><td className="preloader__row" colSpan="4"><ErrorComponent/></td></tr> :
+          props.dataList.SONGS === undefined ? <tr/> : props.dataList.SONGS.map((item, i) => <tr key={i}>
+            <td>{item.singer}</td>
+            <td>{item.title}</td>
+            <td>{item.genre}</td>
+            <td>{item.year}</td>
+          </tr>)}
         </tbody>
       </table>
-      <div>{props.sorting.singer}</div>
     </Fragment>
   );
 };
