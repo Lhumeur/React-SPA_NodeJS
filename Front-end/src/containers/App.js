@@ -8,7 +8,7 @@ import {fetchGetData} from "../actions/fetch.action";
 import MainComponent from "../components/main.component";
 
 const App = (props) => {
-  props.fetchData();
+  props.fetchGetData();
 
   return (
     <MainComponent/>
@@ -18,7 +18,7 @@ const App = (props) => {
 export default connect(
   null,
   dispatch => bindActionCreators({
-      fetchData: fetchGetData,
+      fetchGetData: fetchGetData,
     },
     dispatch
   )

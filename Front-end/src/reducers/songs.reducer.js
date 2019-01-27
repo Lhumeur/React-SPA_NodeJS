@@ -2,6 +2,8 @@ const initialState = {
   loading: false,
   isError: false,
   dataList: {},
+  index: 1,
+  limit: 10,
   SINGERS: [],
   GENRES: [],
   YEARS: [],
@@ -33,7 +35,6 @@ const SongsReducer = (state = initialState, action) => {
       }
     }
     case "@@songs/SORTING": {
-      console.log(action.sorting);
       return {
         ...state,
         SORTING: action.sorting

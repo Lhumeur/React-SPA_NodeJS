@@ -21,11 +21,12 @@ export const fetchReqError = error => {
   };
 };
 
-export const setSorting = (sorting) => (
-  {
+export const setSorting = sorting => {
+  return {
     type: "@@songs/SORTING",
     sorting
-  });
+  }
+};
 
 export const fetchGetData = () => {
   const url = backendApiUrl;
@@ -41,6 +42,46 @@ export const fetchGetData = () => {
           throw new Error(response.status);
         }
       })
+      .then(dataList => {
+        dispatch(fetchReqSuccess(dataList))
+      })
+      .catch(error => dispatch(fetchReqError(error)));
+  };
+};
+
+export const fetchPostData = () => {
+  const index = 2;
+  const limit = 20;
+  const data = {
+    SINGERS: [],
+    GENRES: [],
+    YEARS: [],
+    SORTING: {
+      singer: -1
+    }
+  };
+
+  const url = backendApiUrl + '?index=' + index + '&limit=' + limit;
+
+  return dispatch => {
+    dispatch(fetchRequest());
+
+    fetch(url, {
+      method: 'POST',
+      headers: [
+        ["Content-Type", "application/json"],
+        ["Content-Type", "text/plain"]
+      ],
+      body: JSON.stringify(data)
+    }).then(response => {
+      if (response.ok) {
+        console.log(response.json());
+
+        return response.json();
+      } else {
+        throw new Error(response.status);
+      }
+    })
       .then(dataList => {
         dispatch(fetchReqSuccess(dataList))
       })
