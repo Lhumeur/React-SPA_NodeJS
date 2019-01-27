@@ -8,7 +8,7 @@ const PlaylistComponent = (props) => {
   return (
     <div className="playlist">
       <span>Плейлист</span>
-      <SongsListComponent songs={props.songs}/>
+      <SongsListComponent songs={props.songs} sorting={props.sorting}/>
       <PaginatorComponent pages={props.pages}/>
     </div>
   );

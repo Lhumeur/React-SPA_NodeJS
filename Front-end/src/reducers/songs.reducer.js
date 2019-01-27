@@ -1,7 +1,13 @@
 const initialState = {
   loading: false,
   isError: false,
-  dataList: {}
+  dataList: {},
+  SINGERS: [],
+  GENRES: [],
+  YEARS: [],
+  SORTING: {
+    singer: 1
+  }
 };
 
 const SongsReducer = (state = initialState, action) => {
@@ -24,6 +30,13 @@ const SongsReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         isError: true
+      }
+    }
+    case "@@songs/SORTING": {
+      console.log(action.sorting);
+      return {
+        ...state,
+        SORTING: action.sorting
       }
     }
     default: {

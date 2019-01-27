@@ -10,6 +10,7 @@ const withPlaylist = Component => {
     return {
       songs: state.songs.dataList.SONGS,
       pages: state.songs.dataList.PAGES,
+      sorting: state.songs.SORTING
     }
   };
 

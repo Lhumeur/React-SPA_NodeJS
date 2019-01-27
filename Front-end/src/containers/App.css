@@ -28,6 +28,56 @@ h2 {
   color: dodgerblue;
 }
 
+table {
+  margin-top: 5px;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  border: 1px solid grey;
+  padding: 3px;
+  background-color: lightgrey;
+  position: relative;
+  padding-right: 20px !important;
+  cursor: pointer;
+  user-select: none;
+}
+[data-sort="-1"]:before {
+  border-bottom-color: #333;
+}
+[data-sort="1"]:after {
+  border-top-color: #333;
+}
+th:before, th:after {
+  position: absolute;
+  content: "";
+  right: 5px;
+}
+th:before {
+  top: 50%;
+  margin-top: -5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 5px 5px;
+  border-color: transparent transparent #eee transparent;
+}
+th:after {
+  top: 50%;
+  margin-top: 1px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #eee transparent transparent transparent;
+}
+
+td {
+  border: 1px solid grey;
+  padding: 3px;
+}
+
 .container {
   width: 98vw;
   height: 98vh;
@@ -36,12 +86,11 @@ h2 {
 
 .playlist {
   width: 75%;
-  border: 1px solid black;
 }
 
 .filters {
   width: 25%;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .preloader__container {
