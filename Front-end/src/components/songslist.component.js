@@ -1,7 +1,5 @@
 import React, {Fragment} from "react";
 
-import withSongsList from "./withSongsList";
-
 const SongsListComponent = (props) => {
   function setSort(column) {
     if (props.sorting.hasOwnProperty(column)) {
@@ -15,7 +13,7 @@ const SongsListComponent = (props) => {
     <Fragment>
       <table>
         <tbody>
-        <tr onClick={props.item}>
+        <tr onClick={props.sortAction}>
           <th className="singer" data-sort={setSort("singer")}>Исполнитель</th>
           <th className="song" data-sort={setSort("song")}>Песня</th>
           <th className="genre" data-sort={setSort("genre")}>Жанр</th>
@@ -29,8 +27,9 @@ const SongsListComponent = (props) => {
         </tr>)}
         </tbody>
       </table>
+      <div>{props.sorting.singer}</div>
     </Fragment>
   );
 };
 
-export default withSongsList(SongsListComponent);
+export default SongsListComponent;
