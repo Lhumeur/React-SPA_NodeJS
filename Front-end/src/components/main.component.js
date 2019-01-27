@@ -8,7 +8,7 @@ import ContainerComponent from "./container.component";
 const MainComponent = props => {
   return (
     <Fragment>
-      {props.loading ? <PreloaderComponent/> : props.isError ? <ErrorComponent/> : <ContainerComponent {...props.dataList}/>}
+      {props.loading ? <PreloaderComponent/> : props.isError ? <ErrorComponent/> : <ContainerComponent />}
     </Fragment>
   );
 };

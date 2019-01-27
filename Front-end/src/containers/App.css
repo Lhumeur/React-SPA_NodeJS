@@ -6,6 +6,10 @@
   --box-border-radius: 15%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   width: 100%;
@@ -28,6 +32,16 @@ h2 {
   width: 98vw;
   height: 98vh;
   display: flex;
+}
+
+.playlist {
+  width: 75%;
+  border: 1px solid black;
+}
+
+.filters {
+  width: 25%;
+  margin-left: 10px;
 }
 
 .preloader__container {

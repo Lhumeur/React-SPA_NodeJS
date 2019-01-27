@@ -1,9 +1,14 @@
 import React from "react";
 
-const ContainerComponent = (props) => {
+import PlaylistComponent from "./playlist.component";
+import FiltersComponent from "./filters.component";
+
+
+const ContainerComponent = () => {
   return (
     <div className="container">
-      Yeap!
+      <PlaylistComponent/>
+      <FiltersComponent/>
     </div>
   );
 };
