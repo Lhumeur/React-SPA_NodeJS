@@ -1,5 +1,5 @@
 {
-  "name": "redux-middleware-app",
+  "name": "songs-playlist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

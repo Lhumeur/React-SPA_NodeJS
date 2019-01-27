@@ -4,7 +4,7 @@ import reducer from "./reducers";
 
 
 const configurableStore = () => {
-    return createStore(reducer, applyMiddleware(thunk));
+  return createStore(reducer, applyMiddleware(thunk));
 };
 
 export const store = configurableStore();
