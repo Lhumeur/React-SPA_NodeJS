@@ -23,7 +23,7 @@ const SongsListComponent = (props) => {
           <th className="genre" data-sort={setSort("genre")}>Жанр</th>
           <th className="year" data-sort={setSort("year")}>Год</th>
         </tr>
-        {(props.loading[1]) ? <tr><td className="preloader__row" colSpan="4"><PreloaderComponent/></td></tr> :
+        {(props.loading[1]) ? <tr><td className="preloader__row" colSpan="4"><div className="preloader__row__container"><PreloaderComponent/></div></td></tr> :
           props.isError[1] ? <tr><td className="preloader__row" colSpan="4"><ErrorComponent/></td></tr> :
           props.dataList.SONGS === undefined ? <tr/> : props.dataList.SONGS.map((item, i) => <tr key={i}>
             <td>{item.singer}</td>

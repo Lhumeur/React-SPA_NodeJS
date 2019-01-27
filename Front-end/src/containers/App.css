@@ -89,10 +89,16 @@ td {
   width: 98vw;
   height: 98vh;
   display: flex;
+  overflow:auto;
 }
 
 .preloader__row {
+  text-align: center;
   height: 50px;
+}
+
+.preloader__row__container {
+  display: inline-block;
 }
 
 .playlist {
