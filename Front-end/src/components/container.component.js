@@ -8,7 +8,7 @@ const ContainerComponent = () => {
   return (
     <div className="container">
       <PlaylistComponent/>
-      <FiltersComponent/>
+      {/*<FiltersComponent/>*/}
     </div>
   );
 };
