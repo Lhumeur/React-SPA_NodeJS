@@ -29,5 +29,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://lhumeur.github.io/songs-playlist"
+  "homepage": "https://lhumeur.github.io/React-SPA_NodeJS"
 }
