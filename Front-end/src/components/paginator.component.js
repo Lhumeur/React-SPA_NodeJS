@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 const PaginatorComponent = (props) => {
   return (
     <Fragment>
-      <div id="react-paginate">
+      <div className="react-paginate">
         <ReactPaginate
           previousLabel={'<'}
           nextLabel={'>'}
@@ -18,6 +18,12 @@ const PaginatorComponent = (props) => {
           subContainerClassName={'pages pagination'}
           activeClassName={'active'}
         />
+        <div className="paginate__limit" onClick={props.setLimit}>
+          <button className="limit-button" data-value="10">10</button>
+          <button className="limit-button" data-value="25">25</button>
+          <button className="limit-button" data-value="50">50</button>
+          <button className="limit-button" data-value="100">100</button>
+        </div>
       </div>
     </Fragment>
   );

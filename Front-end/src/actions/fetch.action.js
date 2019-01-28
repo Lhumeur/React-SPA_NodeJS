@@ -56,6 +56,13 @@ export const setIndex = index => {
   }
 };
 
+export const setLimit = limit => {
+  return {
+    type: "@@songs/SET_LIMIT",
+    limit
+  }
+};
+
 export const fetchGetData = () => {
   const url = backendApiUrl;
   console.log(url);
@@ -139,4 +146,8 @@ export const handleSortClick = (event) => (dispatch) => {
 
 export const handleIndexClick = (index) => (dispatch) => {
   return dispatch(setIndex(++index.selected));
+};
+
+export const handleLimitClick = (event) => (dispatch) => {
+  return dispatch(setLimit(+event.target.dataset.value));
 };

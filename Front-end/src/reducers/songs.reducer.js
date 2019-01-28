@@ -66,6 +66,12 @@ const SongsReducer = (state = initialState, action) => {
         index: action.index
       }
     }
+    case "@@songs/SET_LIMIT": {
+      return {
+        ...state,
+        limit: action.limit
+      }
+    }
     default: {
       return state;
     }
