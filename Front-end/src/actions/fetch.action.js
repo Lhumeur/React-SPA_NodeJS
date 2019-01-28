@@ -65,7 +65,7 @@ export const setLimit = limit => {
 
 export const fetchGetData = () => {
   const url = backendApiUrl;
-  console.log(url);
+
   return dispatch => {
     dispatch(fetchGetRequest());
 

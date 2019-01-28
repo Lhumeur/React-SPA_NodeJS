@@ -41,10 +41,19 @@ const SongsReducer = (state = initialState, action) => {
       };
     }
     case "@@songs/POST_RESPONCE_SERVER": {
-      return {
-        ...state,
-        loading: [false, false],
-        dataList: action.dataList
+      if (state.index > action.dataList.PAGES) {
+        return {
+          ...state,
+          loading: [false, false],
+          dataList: action.dataList,
+          index: action.dataList.PAGES
+        }
+      } else {
+        return {
+          ...state,
+          loading: [false, false],
+          dataList: action.dataList
+        }
       }
     }
     case "@@songs/POST_ERROR_SERVER": {
