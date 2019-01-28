@@ -13,8 +13,6 @@ const SongsListComponent = (props) => {
   };
   return (
     <Fragment>
-
-
       <table>
         <tbody>
         <tr onClick={props.sortAction}>

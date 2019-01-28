@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {handleSortClick} from "../actions/fetch.action";
+import {handleIndexClick, handleSortClick} from "../actions/fetch.action";
 
 const withPlaylist = Component => {
   const WrappedComponent = props => {
@@ -15,7 +15,10 @@ const withPlaylist = Component => {
   };
 
   const mapDispatchToProps = dispath => {
-    return bindActionCreators({sortAction: handleSortClick}, dispath);
+    return bindActionCreators({
+      sortAction: handleSortClick,
+      setIndex: handleIndexClick
+    }, dispath);
   };
 
   return connect(

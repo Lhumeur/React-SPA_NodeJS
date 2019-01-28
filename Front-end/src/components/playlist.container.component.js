@@ -8,9 +8,9 @@ import SongsListComponent from "./songslist.component";
 import PaginatorComponent from "./paginator.component";
 
 class PlaylistContainerComponent extends Component {
-  componentDidUpdate(prevProps){
-    if (prevProps.SORTING !== this.props.SORTING){
-      this.props.fetchPostData(this.props.SORTING);
+  componentDidUpdate(prevProps) {
+    if ((prevProps.SORTING !== this.props.SORTING) || (prevProps.index !== this.props.index)) {
+      this.props.fetchPostData(this.props.index, this.props.limit, this.props.SORTING);
     }
   }
 

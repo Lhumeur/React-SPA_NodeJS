@@ -49,6 +49,13 @@ export const setSorting = sorting => {
   }
 };
 
+export const setIndex = index => {
+  return {
+    type: "@@songs/SET_INDEX",
+    index
+  }
+};
+
 export const fetchGetData = () => {
   const url = backendApiUrl;
   console.log(url);
@@ -70,9 +77,7 @@ export const fetchGetData = () => {
   };
 };
 
-export const fetchPostData = (sorting) => {
-  const index = 2;
-  const limit = 20;
+export const fetchPostData = (index, limit, sorting) => {
   const data = {
     SINGERS: [],
     GENRES: [],
@@ -130,4 +135,8 @@ export const handleSortClick = (event) => (dispatch) => {
   sorting[event.target.className] = +event.target.dataset.sort;
 
   return dispatch(setSorting(sorting));
+};
+
+export const handleIndexClick = (index) => (dispatch) => {
+  return dispatch(setIndex(++index.selected));
 };

@@ -89,7 +89,7 @@ td {
   width: 98vw;
   height: 98vh;
   display: flex;
-  overflow:auto;
+  overflow: auto;
 }
 
 .preloader__row {
@@ -632,4 +632,20 @@ td {
     -webkit-transform: scalex(1.3) scaley(0.7);
     transform: scalex(1.3) scaley(0.7);
   }
+}
+
+#react-paginate ul {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#react-paginate li {
+  display: inline-block;
+  margin: auto 10px;
+  cursor: pointer;
+}
+
+[aria-current="page"] {
+  color: #1795ff;
 }

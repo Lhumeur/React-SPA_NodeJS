@@ -60,6 +60,12 @@ const SongsReducer = (state = initialState, action) => {
         SORTING: action.sorting
       }
     }
+    case "@@songs/SET_INDEX": {
+      return {
+        ...state,
+        index: action.index
+      }
+    }
     default: {
       return state;
     }
